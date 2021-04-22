@@ -28,6 +28,26 @@ type rbTree struct{
 	status  bool    //树的状态, true 为正在调整树的平衡
 }
 
+//数据接口
+type Item interface {
+	Less(than Item) bool
+	getInfo () MyInfo
+}
+
+type MyInfo struct {
+	Name    string
+	Age     int
+	ID      int
+}
+
+func (x  MyInfo) Less (than Item)bool{
+	return x.ID < than.(MyInfo).ID
+}
+func (x MyInfo) getInfo() MyInfo {
+	return x
+}
+
+
 //比大小
 func  less(x,y Item)bool{
 	return x.Less(y)
